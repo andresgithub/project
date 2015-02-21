@@ -1,0 +1,58 @@
+---
+title       : Developing Data Products Final Project
+subtitle    : Exponential Growth Calculator
+author      : A. P. Huard
+job         : Februrary, 2015
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Slide 2
+I built a shiny app to calculate the exponential growth of a population. 
+
+---
+
+## Slide 3
+The equation for calculating the exponential growth of a population is the following:
+
+Pt = P0*(1+r)^t
+
+Where:
+- Pt = population at year t.
+- P0 = population at year 0.
+- r = rate of growth of the population.
+- t = number of periods.
+
+---
+
+## Slide 4
+This is the code for building the calculator:
+shinyServer(function(input, output) {
+  numericValues <- reactive({
+  
+    data.frame(
+  		Name = c("populationatyear0", "rateofgrowth", 		"time"),	
+  		Value = c(input$populationatyear0, input$ 					rateofgrowth, input$time),				
+  					stringsAsFactors=FALSE)
+  	
+  })
+  
+  f <- function(populationatyear0, rateofgrowth, time) 	{populationatyear0*(1+rateofgrowth)^time}
+    
+    output$focal <- renderText(
+  	{f(input$populationatyear0, input$rateofgrowth, input	$time)})
+  })
+
+---
+
+## Slide 5
+The user must introduce three inputs:
+- 1. Population at year 0.
+- 2. Rate of growth of the population.
+- 3. Periods of time.
+
+Enjoy your calculations!
